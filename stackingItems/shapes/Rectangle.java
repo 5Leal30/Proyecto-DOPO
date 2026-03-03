@@ -20,6 +20,7 @@ public class Rectangle{
     private String color;
     private boolean isVisible;
 
+
     /**
      * Create a new rectangle at default position with default color.
      */
@@ -181,6 +182,14 @@ public class Rectangle{
             Canvas canvas = Canvas.getCanvas();
             canvas.erase(this);
         }
+    }
+    
+    public int getXPosition(){
+        return xPosition;
+    }
+    
+    public int getYPosition(){
+        return yPosition;
     }
 }
 

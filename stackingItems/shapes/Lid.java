@@ -19,53 +19,71 @@ public class Lid
     /**
      * Constructor for objects of class Lid
      */
-    public void Lid(int lidNumber, int lidWidth)
+    public Lid(int lidNumber, int lidWidth)
     {
-        // initialise instance variables
+        this.lidNumber = lidNumber;
+        this.lidHeight = 1;
+        this.lidWidth = lidWidth;
+        this.ofCup = null;
+        this.lidColor = assignColor(lidNumber);
+        this.xPositionLid = 0;
+        this.yPositionLid = 0;
+        this.lidRectangle = new Rectangle();
+        lidRectangle.changeSize(lidHeight, lidWidth);
+        lidRectangle.changeColor(lidColor);
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
+    private String assignColor(int number){
+        String[] colors = {"yellow","blue","red","green","magenta","orange"};
+        return colors[(number - 1)%colors.length];
+    }
+    
+    public void setPosition(int x, int y){
+        this.xPositionLid = x;
+        this.yPositionLid = y;
+        lidRectangle.moveHorizontal(x - lidRectangle.getXPosition());
+        lidRectangle.moveVertical(y - lidRectangle.getYPosition());
+    }
+    
     public int getLidHeight()
     {
-        // put your code here
+        return lidHeight;
     }
     
     public int getLidNumber()
     {
-        // put your code here
+        return lidNumber;
     }
     
-    public void getLidColor(String color)
+    public String getLidColor()
     {
-        // put your code here
+        return lidColor;
     }
     
     public void setLidColor(String color)
     {
-        // put your code here
+        this.lidColor = color;
+        lidRectangle.changeColor(color);
     }
     
     public void makeVisible()
     {
-        // put your code here
+        lidRectangle.makeVisible();
     }
     
     public void makeInvisible()
     {
-        
+        lidRectangle.makeInvisible();
     }
     
     public void setCup(Cup cup)
     {
-        
-        
+        this.ofCup = cup;
     }
     
+    public Cup getCup(){
+        return ofCup;
+    }
     
     
     
