@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=Cup
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ Cup\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=cupNumber\ cupWidth
-comment1.target=Cup(int,\ int)
+comment1.params=cupNumber\ cupWidth\ scale
+comment1.target=Cup(int,\ int,\ int)
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Cup\r\n
 comment10.params=
 comment10.target=void\ makeVisible()
@@ -12,6 +12,8 @@ comment12.params=lid
 comment12.target=void\ setLid(Lid)
 comment13.params=
 comment13.target=Lid\ getLid()
+comment14.params=
+comment14.target=int\ getCupHeightPx()
 comment2.params=number
 comment2.target=java.lang.String\ assignColor(int)
 comment3.params=
@@ -28,4 +30,4 @@ comment8.params=
 comment8.target=java.lang.String\ getCupColor()
 comment9.params=color
 comment9.target=void\ setCupColor(java.lang.String)
-numComments=14
+numComments=15

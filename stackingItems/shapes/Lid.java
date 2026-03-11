@@ -28,7 +28,7 @@ public class Lid
         this.lidColor = assignColor(lidNumber);
         this.xPositionLid = 0;
         this.yPositionLid = 0;
-        this.lidRectangle = new Rectangle();
+        this.lidRectangle = new Rectangle(0,0);
         lidRectangle.changeSize(lidHeight, lidWidth);
         lidRectangle.changeColor(lidColor);
     }
@@ -41,8 +41,7 @@ public class Lid
     public void setPosition(int x, int y){
         this.xPositionLid = x;
         this.yPositionLid = y;
-        lidRectangle.moveHorizontal(x - lidRectangle.getXPosition());
-        lidRectangle.moveVertical(y - lidRectangle.getYPosition());
+        lidRectangle.setPosition(x,y);
     }
     
     public int getLidHeight()

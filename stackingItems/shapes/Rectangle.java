@@ -24,15 +24,14 @@ public class Rectangle{
     /**
      * Create a new rectangle at default position with default color.
      */
-    public Rectangle(){
+    public Rectangle(int x, int y){
         height = 30;
         width = 40;
-        xPosition = 70;
-        yPosition = 15;
+        xPosition = x;
+        yPosition = y;
         color = "magenta";
         isVisible = false;
     }
-    
 
     /**
      * Make this rectangle visible. If it was already visible, do nothing.
@@ -191,5 +190,13 @@ public class Rectangle{
     public int getYPosition(){
         return yPosition;
     }
+    
+    public void setPosition(int x, int y){
+        erase();
+        xPosition = x;
+        yPosition = y;
+        draw();
+    }
+    
 }
 

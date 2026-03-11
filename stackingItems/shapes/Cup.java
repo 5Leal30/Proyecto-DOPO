@@ -16,42 +16,53 @@ public class Cup
     private int cupNumber;
     private int cupWidth;
     private int cupHeightPx;
+    private int scale;
+    private int grosor;
     
     
 
     /**
      * Constructor for objects of class Cup
      */
-    public Cup(int cupNumber, int cupWidth)
+    public Cup(int cupNumber, int cupWidth, int scale)
     {
         this.cupNumber = cupNumber;
-        this.cupHeight = cupNumber;
+        this.cupHeight = 2 * cupNumber - 1;
         this.cupWidth = cupWidth;
         this.ofLid = null;
         this.colorCup = assignColor(cupNumber);
         this.xPositionCup = 0;
-        this.cupHeightPx = cupNumber * 20;
+        int alturaCalculada = (2 * cupNumber - 1) * scale;
+        int alturaAnterior = (2 * (cupNumber - 1) - 1) * scale;
+        int alturaMinima = alturaAnterior + scale * 2;
+        if (alturaCalculada < alturaMinima){
+            this.cupHeightPx = alturaMinima;
+        } else {
+            this.cupHeightPx = alturaCalculada;
+        }
         this.yPositionCup = 0;
         this.cupRectangles = new Rectangle[3];
+        this.scale = scale;
+        this.grosor = scale;
         construirTaza();
     }
 
     private String assignColor(int number) {
-        String[] colors = {"yellow","blue","red","green","green","orange"};
+        String[] colors = {"yellow", "blue", "red", "green", "magenta", "orange", "black", "white", "cyan", "pink", "gray", "lightGray", "darkGray"};
         return colors[(number-1) % colors.length];
     }
     
     private void construirTaza(){
-        int grosor = 3;
-        cupRectangles[0] = new Rectangle();
+        int grosor = scale;
+        cupRectangles[0] = new Rectangle(0, 0);
         cupRectangles[0].changeSize(cupHeightPx, grosor);
         cupRectangles[0].changeColor(colorCup);
         
-        cupRectangles[1] = new Rectangle();
+        cupRectangles[1] = new Rectangle(0, 0);
         cupRectangles[1].changeSize(cupHeightPx, grosor);
         cupRectangles[1].changeColor(colorCup);
         
-        cupRectangles[2] = new Rectangle();
+        cupRectangles[2] = new Rectangle(0, 0);
         cupRectangles[2].changeSize(grosor, cupWidth);
         cupRectangles[2].changeColor(colorCup);
         
@@ -60,16 +71,10 @@ public class Cup
     public void setPosition(int x, int y){
         this.xPositionCup = x;
         this.yPositionCup = y;
-        int width = cupWidth;
-        int grosor = 3;
-        
-        cupRectangles[2].moveHorizontal(x - cupRectangles[2].getXPosition());
-        cupRectangles[2].moveVertical((y + cupHeight - grosor) - cupRectangles[2].getYPosition());
-        cupRectangles[0].moveHorizontal(x - cupRectangles[0].getXPosition());
-        cupRectangles[0].moveVertical(y - cupRectangles[0].getYPosition());
-        cupRectangles[1].moveHorizontal((x + cupWidth - grosor) - cupRectangles[1].getXPosition());
-        cupRectangles[1].moveVertical(y - cupRectangles[1].getYPosition());
-
+        int grosor = scale;
+        cupRectangles[0].setPosition(x,y);
+        cupRectangles[1].setPosition(x + cupWidth - grosor, y);
+        cupRectangles[2].setPosition(x, y + cupHeightPx - grosor);
     }
     
     public boolean hasLid()
@@ -123,4 +128,7 @@ public class Cup
         return ofLid;
     }
     
+    public int getCupHeightPx(){
+        return cupHeightPx;
+    }
 }

@@ -8,7 +8,7 @@ import java.util.Collections;
  */
 public class Tower
 {
-    private static final int SCALE = 20;
+    private int SCALE = 20;
     private static final int margen = 30;
     private int heightTower;
     private int widthTower;
@@ -26,6 +26,7 @@ public class Tower
     public Tower(int width, int maxHeight)
     {
         this.widthTower = width * SCALE;
+        this.SCALE = 20;
         this.heightTower = maxHeight;
         this.currentHeight = 0;
         this.isVisible = false;
@@ -53,15 +54,23 @@ public class Tower
             }
         }
         this.heightTower = totalHeight;
+        this.SCALE = 500 / totalHeight;
         this.widthTower = maxWidth * SCALE;
-        for (int i = 1; i <= numCups; i++){
-            int cupHeightPixels = (2 * i - 1) * SCALE;
-            Cup cup = new Cup(i, widthTower);
-            int yPixels = (heightTower - currentHeight) * SCALE - cupHeightPixels;
-            cup.setPosition(margen, yPixels);
+        int centroTorre = margen + (widthTower / 2);
+        int grosor = SCALE;
+        int anchoMinimo = SCALE * 3;
+        int yFondoBase = heightTower * SCALE;
+        boolean primeraCup = true;
+        for (int i = numCups; i >= 1; i--){
+            int anchoTaza = (2 * i - 1) * SCALE;
+            Cup cup = new Cup(i, anchoTaza, SCALE);
+            int xCentrada = centroTorre - (anchoTaza / 2);
+            int yParedes = yFondoBase - cup.getCupHeightPx();
+            cup.setPosition(xCentrada, yParedes);
             cups.add(cup);
-            currentHeight += (2 * i - 1);
+            yFondoBase = yFondoBase - grosor;
         }
+        this.currentHeight = 2 * numCups - 1;
     }
 
     /**
@@ -71,7 +80,7 @@ public class Tower
     public void pushCup(int i)
     {
         if (!existeCup(i) && cabe(i)){
-            Cup cup = new Cup(i, widthTower);
+            Cup cup = new Cup(i, widthTower, SCALE);
             int yPixels = (heightTower - currentHeight - i)* SCALE;
             cup.setPosition(margen, yPixels);
             if(isVisible){
