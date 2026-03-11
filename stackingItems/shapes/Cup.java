@@ -15,6 +15,7 @@ public class Cup
     private int yPositionCup;
     private int cupNumber;
     private int cupWidth;
+    private int cupHeightPx;
     
     
 
@@ -29,6 +30,7 @@ public class Cup
         this.ofLid = null;
         this.colorCup = assignColor(cupNumber);
         this.xPositionCup = 0;
+        this.cupHeightPx = cupNumber * 20;
         this.yPositionCup = 0;
         this.cupRectangles = new Rectangle[3];
         construirTaza();
@@ -42,11 +44,11 @@ public class Cup
     private void construirTaza(){
         int grosor = 3;
         cupRectangles[0] = new Rectangle();
-        cupRectangles[0].changeSize(cupHeight, grosor);
+        cupRectangles[0].changeSize(cupHeightPx, grosor);
         cupRectangles[0].changeColor(colorCup);
         
         cupRectangles[1] = new Rectangle();
-        cupRectangles[1].changeSize(cupHeight, grosor);
+        cupRectangles[1].changeSize(cupHeightPx, grosor);
         cupRectangles[1].changeColor(colorCup);
         
         cupRectangles[2] = new Rectangle();
@@ -61,12 +63,13 @@ public class Cup
         int width = cupWidth;
         int grosor = 3;
         
-        cupRectangles[0].moveHorizontal(x - cupRectangles[0].getXPosition());
-        cupRectangles[0].moveVertical(y - cupRectangles[0].getYPosition());
-        cupRectangles[1].moveHorizontal((x + width - grosor) - cupRectangles[1].getXPosition());
-        cupRectangles[1].moveVertical(y - cupRectangles[1].getYPosition());
         cupRectangles[2].moveHorizontal(x - cupRectangles[2].getXPosition());
         cupRectangles[2].moveVertical((y + cupHeight - grosor) - cupRectangles[2].getYPosition());
+        cupRectangles[0].moveHorizontal(x - cupRectangles[0].getXPosition());
+        cupRectangles[0].moveVertical(y - cupRectangles[0].getYPosition());
+        cupRectangles[1].moveHorizontal((x + cupWidth - grosor) - cupRectangles[1].getXPosition());
+        cupRectangles[1].moveVertical(y - cupRectangles[1].getYPosition());
+
     }
     
     public boolean hasLid()
